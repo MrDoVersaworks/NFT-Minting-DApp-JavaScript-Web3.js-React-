@@ -1,0 +1,33 @@
+import React, { useState, useEffect } from "react";
+import Web3 from "web3";
+import { abi, contractAddress } from "./MyNFTContract";
+
+const MintNFT = () => {
+    const [account, setAccount] = useState(null);
+    const [web3, setWeb3] = useState(null);
+    const [contract, setContract] = useState(null);
+
+    useEffect(() => {
+        const init = async () => {
+            const web3 = new Web3(window.ethereum);
+            setWeb3(web3);
+            await window.ethereum.request({ method: "eth_requestAccounts" });
+            const accounts = await web3.eth.getAccounts();
+            setAccount(accounts[0]);
+            const myContract = new web3.eth.Contract(abi, contractAddress);
+            setContract(myContract);
+        };
+        init();
+    }, []);
+
+    const mintNFT = async () => {
+        await contract.methods.mint(account).send({ from: account });
+    };
+
+    return (
+        <div>
+            <button onClick={mintNFT}>Mint NFT</button>
+        </div>
+    );
+};
+export default MintNFT;
