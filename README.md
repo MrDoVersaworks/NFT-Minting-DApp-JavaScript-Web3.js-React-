@@ -1,7 +1,7 @@
 
 ---
 
-### 2. **NFT Minting DApp (JavaScript, Web3.js, React)**
+### **NFT Minting DApp (JavaScript, Web3.js, React)**
 
 #### README Example:
 ```markdown
